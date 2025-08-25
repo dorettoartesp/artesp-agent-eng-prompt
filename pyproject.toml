@@ -1,0 +1,9 @@
+[project]
+name = "artesp-agent-eng-prompt"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "markitdown-mcp>=0.0.1a4",
+]
