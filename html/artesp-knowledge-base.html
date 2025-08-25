@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARTESP Multimodal Knowledge Base</title>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+  <div class="min-h-screen">
+    <header class="border-b bg-white">
+      <div class="mx-auto max-w-3xl px-4 py-4">
+        <h1 id="pageTitle" class="text-2xl font-semibold">Loading…</h1>
+        <p class="text-sm text-zinc-500"><a class="hover:underline" href="./index.html">Back to index</a></p>
+      </div>
+    </header>
+    <main class="mx-auto max-w-3xl px-4 py-8">
+      <article id="content" class="prose prose-zinc md:prose-lg"></article>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    (async () => {
+      const mdPath = './docs/Base de Conhecimento ARTESP Multimodal.md';
+      try {
+        const res = await fetch(encodeURI(mdPath));
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const md = await res.text();
+        const html = marked.parse(md);
+        document.getElementById('content').innerHTML = html;
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        const h1 = tmp.querySelector('h1');
+        const title = h1 ? h1.textContent.trim() : 'ARTESP Multimodal Knowledge Base';
+        document.title = title;
+        document.getElementById('pageTitle').textContent = title;
+      } catch (err) {
+        document.getElementById('content').innerHTML = '<p class="text-red-600">Failed to load Markdown. Please open via a local HTTP server (e.g., <code>python -m http.server</code>).</p>';
+        document.title = 'Load error';
+        document.getElementById('pageTitle').textContent = 'Load error';
+        console.error(err);
+      }
+    })();
+  </script>
+</body>
+</html>
+
