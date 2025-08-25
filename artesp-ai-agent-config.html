@@ -25,7 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     (async () => {
-      const mdPath = '../docs/Configuração de Agente de IA ARTESP.md';
+      const mdPath = './docs/Configuração de Agente de IA ARTESP.md';
       try {
         const res = await fetch(encodeURI(mdPath));
         if (!res.ok) throw new Error('HTTP ' + res.status);
